@@ -1,11 +1,11 @@
 <div class="container">
-  <br>
-  <div class="card bg-light">
+  <div class="card bg-light m-3">
     <article class="card-body mx-auto my-auto" style="max-width: 400px;">
-      <h4 class="card-title mt-3 text-center">Sign Up</h4>
+      <h4 class="card-title mt-3 text-center">Sign Up Form</h4>
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <app-input
           *ngFor="let input of inputs"
+          [iconClass]="input.iconClass"
           [name]="input.name"
           [placeholder]="input.placeholder"
           [type]="input.type"

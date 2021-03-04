@@ -8,6 +8,8 @@ import {ControlContainer, FormGroup} from '@angular/forms';
 export class InputComponent implements OnInit {
   form: FormGroup;
   @Input()
+  iconClass: string;
+  @Input()
   name: string;
   @Input()
   placeholder: string;

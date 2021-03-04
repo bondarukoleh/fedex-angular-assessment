@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {passwordValidation} from '../../helpers/validators';
 
 const sighUpFormsFields = [
-  {name: 'firstName', placeholder: 'First Name', type: 'text'},
-  {name: 'lastName', placeholder: 'Last Name', type: 'text'},
-  {name: 'email', placeholder: 'Email', type: 'email'},
-  {name: 'password', placeholder: 'Password', type: 'password'},
+  {name: 'firstName', placeholder: 'First Name', type: 'text', iconClass: 'fa fa-user'},
+  {name: 'lastName', placeholder: 'Last Name', type: 'text', iconClass: 'fa fa-user'},
+  {name: 'email', placeholder: 'Email', type: 'email', iconClass: 'fa fa-envelope'},
+  {name: 'password', placeholder: 'Password', type: 'password', iconClass: 'fa fa-lock'},
 ];
 
 @Component({
@@ -23,14 +24,14 @@ export class SignupComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      firstName: ['', [Validators.required, Validators.maxLength(10)]],
-      lastName: ['', [Validators.required, Validators.maxLength(10)]],
+      firstName: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.maxLength(10)]]
-    });
+      password: ['', [Validators.required]]
+    }, {validators: passwordValidation});
   }
 
-  get inputs(): { name: string, placeholder: string, type: string }[] {
+  get inputs(): { name: string, placeholder: string, type: string, iconClass: string }[] {
     return sighUpFormsFields;
   }
 
