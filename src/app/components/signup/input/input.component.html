@@ -1,0 +1,18 @@
+<div [formGroup]="form" class="form-group input-group">
+  <div class="input-group-prepend">
+    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+  </div>
+  <input
+    autocomplete="on"
+    formControlName="{{name}}"
+    name="{{name}}"
+    class="form-control"
+    placeholder="{{placeholder}}"
+    type="{{type}}"
+    [ngClass]="{ 'is-invalid': formSubmitted && form.controls[name].errors }"
+  >
+  <div *ngIf="formSubmitted && form.controls[name].errors" class="invalid-feedback">
+    <div *ngIf="formSubmitted && form.controls[name].errors.required">{{placeholder}} is required</div>
+    <div *ngIf="formSubmitted && form.controls[name].errors.email">{{placeholder}} is invalid</div>
+  </div>
+</div>

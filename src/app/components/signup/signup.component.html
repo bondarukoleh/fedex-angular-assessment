@@ -1,0 +1,20 @@
+<div class="container">
+  <br>
+  <div class="card bg-light">
+    <article class="card-body mx-auto my-auto" style="max-width: 400px;">
+      <h4 class="card-title mt-3 text-center">Sign Up</h4>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <app-input
+          *ngFor="let input of inputs"
+          [name]="input.name"
+          [placeholder]="input.placeholder"
+          [type]="input.type"
+          [formSubmitted]="formSubmitted"
+        ></app-input>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary btn-block"> Sign Up</button>
+        </div>
+      </form>
+    </article>
+  </div>
+</div>
