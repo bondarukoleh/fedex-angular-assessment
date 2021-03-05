@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {passwordValidation} from '../../helpers/validators';
+import {HttpClient} from '@angular/common/http';
+import {UserApi} from '../../api/userApi';
 
 const sighUpFormsFields = [
   {name: 'firstName', placeholder: 'First Name', type: 'text', iconClass: 'fa fa-user'},
@@ -17,9 +19,7 @@ export class SignupComponent implements OnInit {
   form: FormGroup;
   formSubmitted = false;
 
-  constructor(
-    private formBuilder: FormBuilder,
-  ) {
+  constructor(private formBuilder: FormBuilder, private http: HttpClient, private userApi: UserApi) {
   }
 
   ngOnInit(): void {
@@ -35,13 +35,17 @@ export class SignupComponent implements OnInit {
     return sighUpFormsFields;
   }
 
-  onSubmit(): Promise<boolean> {
+  async onSubmit(): Promise<void> {
     this.formSubmitted = true;
 
     if (this.form.invalid) {
       return;
     }
 
-    sighUpFormsFields.forEach(({name}) => console.log(this.form.controls[name].value));
+    await this.userApi.createUser({
+      firstName: this.form.controls.firstName.value,
+      lastName: this.form.controls.lastName.value,
+      email: this.form.controls.email.value,
+    });
   }
 }
