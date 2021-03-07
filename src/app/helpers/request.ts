@@ -12,15 +12,15 @@ export class Request {
     this.mainUrl = url;
   }
 
-  post(path: string, body: any, config?: any): Promise<object> {
+  post(path: string, body: any, config?: any): Promise<unknown> {
     return this.http.post(`${this.mainUrl}${path}`, body, config)
       .toPromise()
       .then((result) => result)
       .catch(error => this.handleError('Post request', error));
   }
 
-  private handleError(operation = 'operation', error): {error: boolean, errorMessage?: string} {
-      console.error(`${operation} failed: ${error.message}`);
-      return {error: true, errorMessage: error.message};
+  private handleError(operation = 'operation', error): { error: boolean, errorMessage?: string } {
+    console.error(`${operation} failed: ${error.message}`);
+    return {error: true, errorMessage: error.message};
   }
 }

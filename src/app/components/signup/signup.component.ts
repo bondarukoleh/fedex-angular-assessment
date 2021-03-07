@@ -24,8 +24,8 @@ export class SignupComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      firstName: ['', [Validators.required]],
-      lastName: ['', [Validators.required]],
+      firstName: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
+      lastName: ['', [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]]
     }, {validators: passwordValidation});
@@ -47,5 +47,13 @@ export class SignupComponent implements OnInit {
       lastName: this.form.controls.lastName.value,
       email: this.form.controls.email.value,
     });
+
+    this.resetForm();
+  }
+
+  private resetForm(): void {
+    this.form.reset();
+    /* To not trigger the validation */
+    Object.keys(this.form.controls).forEach(key => this.form.controls[key].setErrors(null));
   }
 }
